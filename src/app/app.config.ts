@@ -2,7 +2,8 @@ import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } fr
 import { provideRouter, withHashLocation, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +15,6 @@ export const appConfig: ApplicationConfig = {
       },
     })),
     // importProvidersFrom(HttpClientModule),
-    provideHttpClient()
+    provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync()
   ]
 };

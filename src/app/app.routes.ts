@@ -1,4 +1,6 @@
+import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
+import { UserService } from '@services/user.service';
 
 export const routes: Routes = [
     {
@@ -47,6 +49,16 @@ export const routes: Routes = [
                 loadComponent: () => import('./dashboard/pages/view-transition-2/view-transition-2.component').then(m => m.ViewTransitionComponent)
             },
             {
+                path: 'inputs-outputs',
+                title: 'Inputs and Outputs',
+                loadComponent: () => import('./dashboard/pages/input-output/input-output.component').then(m => m.InputOutputComponent)
+            },
+            {
+                path: 'angular-material',
+                title: 'Angular Material',
+                loadComponent: () => import('./dashboard/pages/material/material.component').then(m => m.MaterialComponent)
+            },
+            {
                 path: '**',
                 redirectTo: 'control-flow',
                 pathMatch: 'full'
@@ -55,7 +67,17 @@ export const routes: Routes = [
     },
     {
         path: '**',
-        redirectTo: 'dashboard',
+        // redirectTo: 'dashboard',
+        // no puede ser async, si queremos hacer eso debemos hacerlo en un Guard o una funcion para verificar si el usuario esta autenticado o si tiene acceso o no
+        redirectTo: (route) => {
+            // console.log('Redirecting to dashboard', route);
+            // se puede injectar servicios y hacer validaciones
+            // const authService = inject(UserService);
+            // if (UserService.isAuthenticated()) {
+            //     return '/dashboard';
+            // }
+            return '/dashboard/angular-material';
+        },
         pathMatch: 'full'
     }
 ];
