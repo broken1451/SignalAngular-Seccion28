@@ -1,0 +1,13 @@
+<app-title [title]="titleLabel()" />
+
+@if (user()) {
+    <section> 
+        <img src="" [alt]="user()?.first_name" [srcset]="user()?.avatar">
+        <div>
+            <h3> {{titleLabel()}}</h3>
+            <p>{{user()?.email}}</p>
+        </div>
+    </section>
+} @else {
+    <p>Cargando informacion...</p>
+}  

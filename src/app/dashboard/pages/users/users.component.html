@@ -1,0 +1,13 @@
+<app-title [title]="'User list'" />
+
+<ul>
+    @for (item of userSvs.users(); track item.id) {
+        <li class="flex items-center cursor-pointer my-2">
+            <img class="rounded w-14" 
+                src="" [alt]="item.first_name" [srcset]="item.avatar">
+            <a class="mx-5 hover:underline" [routerLink]="['/dashboard/user', item.id]">
+                {{ item.first_name }}
+            </a>
+        </li>
+    }
+</ul>
